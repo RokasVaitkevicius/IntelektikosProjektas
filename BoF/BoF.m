@@ -1,16 +1,6 @@
-% Location of the compressed data set
-url = 'http://www.vision.caltech.edu/Image_Datasets/Caltech101/101_ObjectCategories.tar.gz';
-% Store the output in a temporary folder
-outputFolder = fullfile('C:\Users\vaitk\Desktop\Intelektika', 'caltech101'); % define output folder
+rootFolder = fullfile('C:\Users\vaitk\Desktop\IntelektikosProjektas', 'Raides');
 
-if ~exist(outputFolder, 'dir') % download only once
-    disp('Downloading 126MB Caltech101 data set...');
-    untar(url, outputFolder);
-end
-
-rootFolder = fullfile('C:\Users\vaitk\Desktop\Intelektika', 'Raides');
-
-categories = {'à', 'è'};
+categories = {'à', 'è', 'æ'};
 imds = imageDatastore(fullfile(rootFolder, categories), 'LabelSource', 'foldernames');
 
 tbl = countEachLabel(imds)
@@ -26,15 +16,18 @@ countEachLabel(imds)
 [trainingSet, validationSet] = splitEachLabel(imds, 0.3, 'randomize');
 
 % Find the first instance of an image for each category
-airplanes = find(trainingSet.Labels == 'à', 1);
-ferry = find(trainingSet.Labels == 'è', 1);
+aNosine = find(trainingSet.Labels == 'à', 1);
+cSuVarnele = find(trainingSet.Labels == 'è', 1);
+eNosine = find(trainingSet.Labels == 'æ', 1);
 
 % figure
 
 subplot(1,3,1);
-imshow(readimage(trainingSet,airplanes))
+imshow(readimage(trainingSet,aNosine))
 subplot(1,3,2);
-imshow(readimage(trainingSet,ferry))
+imshow(readimage(trainingSet,cSuVarnele))
+subplot(1,3,3);
+imshow(readimage(trainingSet,eNosine))
 
 bag = bagOfFeatures(trainingSet);
 
@@ -57,7 +50,7 @@ confMatrix = evaluate(categoryClassifier, validationSet);
 % Compute average accuracy
 mean(diag(confMatrix));
 
-img = imread(fullfile(rootFolder, 'à', 'Capture.png'));
+img = imread(fullfile(rootFolder, 'à', '1.png'));
 [labelIdx, scores] = predict(categoryClassifier, img);
 
 % Display the string label
