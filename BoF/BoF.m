@@ -50,7 +50,7 @@ confMatrix = evaluate(categoryClassifier, validationSet);
 % Compute average accuracy
 mean(diag(confMatrix));
 
-img = imread(fullfile(rootFolder, 'à', '1.png'));
+img = imread(fullfile(rootFolder, 'è', '1.jpg'));
 [labelIdx, scores] = predict(categoryClassifier, img);
 
 % Display the string label
