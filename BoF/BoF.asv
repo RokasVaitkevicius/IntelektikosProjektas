@@ -1,14 +1,14 @@
 close all;
 
-rootFolder = fullfile('C:\Users\vaitk\Desktop\IntelektikosProjektas\BoF', 'Raides');
-testFolder = fullfile('C:\Users\vaitk\Desktop\IntelektikosProjektas\BoF', 'TestuojamosRaides');
+rootFolder = fullfile('C:\Users\vaitk\Desktop\IntelektikosProjektas', 'Raides');
+testFolder = fullfile('C:\Users\vaitk\Desktop\IntelektikosProjektas', 'AnalizeM');
 categories = {'à', 'è', 'æ', 'ë', 'á', 'ð', 'ø', 'û', 'þ'};
 imds = imageDatastore(fullfile(rootFolder, categories), 'LabelSource', 'foldernames');
 imdts = imageDatastore(fullfile(testFolder, categories), 'LabelSource', 'foldernames');
 
-trainingSet = imds;
-validationSet = imdts;
-%[trainingSet, validationSet] = splitEachLabel(imds, 0.6);
+%trainingSet = imds;
+%validationSet = imdts;
+[trainingSet, validationSet] = splitEachLabel(imds, 0.6);
 tsc = countEachLabel(trainingSet)
 vsc = countEachLabel(validationSet)
 
