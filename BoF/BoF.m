@@ -1,5 +1,5 @@
 close all;
-
+%rootFolder = fullfile('C:\Users\vaitk\Desktop\IntelektikosProjektas', 'Raides');
 rootFolder = fullfile('C:\Users\vaitk\Desktop\IntelektikosProjektas\BoF', 'Raides');
 testFolder = fullfile('C:\Users\vaitk\Desktop\IntelektikosProjektas\BoF', 'TestuojamosRaides');
 categories = {'à', 'è', 'æ', 'ë', 'á', 'ð', 'ø', 'û', 'þ'};
@@ -8,7 +8,7 @@ imdts = imageDatastore(fullfile(testFolder, categories), 'LabelSource', 'foldern
 
 trainingSet = imds;
 validationSet = imdts;
-%[trainingSet, validationSet] = splitEachLabel(imds, 0.6);
+%[trainingSet, validationSet] = splitEachLabel(imds, 0.5);
 tsc = countEachLabel(trainingSet)
 vsc = countEachLabel(validationSet)
 
